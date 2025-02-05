@@ -1,26 +1,26 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity } from '../redux/cartSlice';
+import React from "react";
 
-const Cart = () => {
-  const cartItems = useSelector(state => state.cart.cartItems);
-  const dispatch = useDispatch();
-
+const dispatch = useDispatch();
+const Cart = ({ cart, removeFromCart, updateQuantity }) => {
   return (
     <div>
       <h2>Shopping Cart</h2>
-      {cartItems.length === 0 ? <p>Cart is empty</p> : (
-        cartItems.map(item => (
-          <div key={item.id}>
+      {cart.length === 0 ? (
+        <p>Cart is empty</p>
+      ) : (
+        cart.map((item) => (
+          <div key={item.id} className="cart-item">
             <h3>{item.name}</h3>
-            <p>Price: ${item.price}</p>
+            <p>${item.price}</p>
             <input
               type="number"
               value={item.quantity}
               min="1"
-              onChange={(e) => dispatch(updateQuantity({ id: item.id, quantity: Number(e.target.value) }))}
+              onChange={(e) => updateQuantity(item.id, Number(e.target.value))}
             />
-            <button onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
+            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+              Remove
+            </button>
           </div>
         ))
       )}
