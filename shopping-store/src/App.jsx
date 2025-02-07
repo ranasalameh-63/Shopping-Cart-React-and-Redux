@@ -1,17 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ProductList from './components/ProductList';
+import ProductCards from './components/ProductList';
 import Cart from './components/Cart';
+import Navbar from './components/nav';
 
 
 const App = () => {
   return (
     <Router>
-      <nav>
-        <Link to="/">Products</Link> | <Link to="/cart">Cart</Link>
-      </nav>
+      <Navbar/>
       <Routes>
-        <Route path="/" element={<ProductList />} />
+        <Route path="/" element={<ProductCards />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
@@ -19,3 +18,4 @@ const App = () => {
 };
 
 export default App;
+
